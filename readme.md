@@ -73,13 +73,21 @@ CI/CD pipelines can also automate the transfer of the Pact file to a location no
 
 #### Use a Pact Broker
 
-Another option would be to store these pacts using a Pact broker. [PactFlow](https://pactflow.io) is a cloud-based services which provides this service. 
+Another option would be to store these pacts using a Pact broker. [PactFlow](https://pactflow.io) is a cloud-based service which offers this functionality. 
 
 A local copy of the pact broker can also be instantiated. It requires a Postgres database for storage. The documentation [here](https://docs.pact.io/pact_broker/docker_images/pactfoundation/) provides ample information and guidance. A Docker compose file is also provided [here](https://github.com/pact-foundation/pact-broker-docker/blob/master/docker-compose.yml) to include a Postgres instance for experimental use. 
 
 Once a Pact broker has been enabled, the pact file can then be pushed into its repository.
 
 ### Generate the specifications based on expectations 
+
+There are a number of options to generate the specifications. As this solution is focused primarily on OpenApi (or Swagger), cloud services such as [Swagger Hub](https://swagger.io/tools/swaggerhub/) provide an integrated experience to managing the lifecycle of this document. 
+
+A local-based approach would be to use the [OpenAPI extension](https://marketplace.visualstudio.com/items?itemName=42Crunch.vscode-openapi) for [VS Code](https://code.visualstudio.com/) or [VS Codium](https://vscodium.com/). 
+
+another approach could be the use of the Swagger Editor, which is available either on the [cloud](https://github.com/swagger-api/swagger-editor) or [locally](https://github.com/swagger-api/swagger-editor) with a choice of NodeJs or Docker.
+
+The resulting file can be in either Yaml or Json formats. A generated file is included in this solution, under ``./OpenApi`` 
 
 ### Initiate a mock server based on the specifications
 
