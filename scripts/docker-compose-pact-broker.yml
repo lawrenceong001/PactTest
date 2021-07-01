@@ -31,18 +31,5 @@ services:
       # This allows the app to be addressed from the host from within another docker container correctly
       PACT_BROKER_BASE_URL: 'https://localhost http://localhost http://localhost:9292 http://pact-broker:9292'
 
-  # Nginx is not necessary, but demonstrates how
-  # one might use a reverse proxy in front of the broker,
-  # and includes the use of a self-signed TLS certificate
-  nginx:
-    image: nginx:alpine
-    depends_on:
-      - pact-broker
-    volumes:
-      - ./ssl/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./ssl:/etc/nginx/ssl
-    ports:
-      - "443:443"
-      - "80:80"
 volumes:
   postgres-volume:

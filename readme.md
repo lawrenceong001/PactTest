@@ -75,9 +75,17 @@ CI/CD pipelines can also automate the transfer of the Pact file to a location no
 
 Another option would be to store these pacts using a Pact broker. [PactFlow](https://pactflow.io) is a cloud-based service which offers this functionality. 
 
-A local copy of the Pact broker can also be instantiated. It requires a Postgres database for storage. The documentation [here](https://docs.pact.io/pact_broker/docker_images/pactfoundation/) provides ample information and guidance. A Docker compose file is also provided [here](https://github.com/pact-foundation/pact-broker-docker/blob/master/docker-compose.yml) which include a Postgres instance for experimental use. 
+A local copy of the Pact broker can also be instantiated. It requires a Postgres database for storage. The documentation [here](https://docs.pact.io/pact_broker/docker_images/pactfoundation/) provides ample information and guidance. A Docker compose file is also provided [here](https://github.com/pact-foundation/pact-broker-docker/blob/master/docker-compose.yml) which include a Postgres instance for experimental use. The steps to start and stop this version is included below.
 
 Once a Pact broker has been enabled, the pact file can then be pushed into its repository.
+
+A PowerShell script is included to start Pact Broker. To start this, from the root of this project, type in the following command in a Powershell window:
+		``.\scripts\StartPactBroker.ps1``
+
+This will start the Pact Broker. Head on to ``http://localhost:9292`` to access the application.
+
+To stop the broker, start another PowerShell window, and type in the following command at the root of this project:
+		``.\scripts\StopPactBroker.ps1``
 
 ### Generate the specifications based on expectations 
 
