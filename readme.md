@@ -13,7 +13,7 @@ Pact is a contract testing tool initially focused on the consumer. It collects c
 
 ### Why Pact?
 
-Pact is an open source testing framework, generally agnostic of current contract language syntaxes, and as such isn't directly affected when specification schange. While this solution currently works with OpenApi, Pact expectations can eventually be verified against providers that use other syntaxes, such as GraphQl. 
+Pact is an open source testing framework, generally agnostic of current contract language syntaxes, and as such isn't directly affected when specifications change. While this solution currently works with OpenApi, Pact expectations can eventually be verified against providers that use other syntaxes, such as GraphQl. 
 
 ### Consumer Side
 
@@ -69,7 +69,7 @@ This solution will be using an xUnit project to aid in the generation of the Pac
 
 Once the tests are successfully executed, a Pact file will be generated. For the purpose of this solution, it is stored inside the ``.\pact`` folder. This can serve as the location for the providers to view this as well. 
 
-CI/CD pipelines can also automate the transfer of the Pact file to a location not related to this project, which ensures its visibility and accessibility for authomation tasks.
+CI/CD pipelines can also automate the transfer of the Pact file to a location not related to this project, which ensures its visibility and accessibility for automation tasks.
 
 #### Use a Pact Broker
 
