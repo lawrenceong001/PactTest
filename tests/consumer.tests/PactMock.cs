@@ -1,4 +1,6 @@
-﻿using PactNet;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using PactNet;
 using PactNet.Mocks.MockHttpService;
 using System;
 using System.Collections.Generic;
@@ -24,14 +26,17 @@ namespace consumer.tests
 			{
 				SpecificationVersion = "2.0.0",
 				PactDir = @"..\..\..\..\..\pacts",
-				LogDir =  @"..\..\..\..\..\..\logs"
+				LogDir = @"..\..\..\..\..\..\logs"
 			};
 
 			_pactBuilder = new PactBuilder(pactConfig)
 			.ServiceConsumer("Consumer1")
 			.HasPactWith("TestApi1");
 
-			MockProviderService = _pactBuilder.MockService(MockServerPort);
+			MockProviderService = _pactBuilder.MockService(MockServerPort, new JsonSerializerSettings
+			{
+				ContractResolver = new CamelCasePropertyNamesContractResolver()
+			});
 		}
 
 		private bool _disposed = false;

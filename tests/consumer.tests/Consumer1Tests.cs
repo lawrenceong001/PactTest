@@ -1,4 +1,5 @@
 using DataModel;
+using PactNet.Matchers;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
 using System;
@@ -26,12 +27,12 @@ namespace consumer.tests
     {
       //Arrange
       _mockProviderService
-        .Given("There is a something with id 1")
-        .UponReceiving("A GET request to retrieve the something")
+        .Given("There is a record of 'Something' with an id of 1")
+        .UponReceiving("A GET request to retrieve 'Something'")
         .With(new ProviderServiceRequest
         {
           Method = HttpVerb.Get,
-          Path = "/somethings/1",
+          Path = "/Something/1",
           Headers = new Dictionary<string, object>
           {
           { "Accept", "application/json" }
@@ -47,8 +48,8 @@ namespace consumer.tests
           Body = new Something
           {
             id = 1,
-            textValue = "Text",
-            dateValue = DateTime.Parse("2021/01/01")
+            textValue = "Text Value",
+            dateValue = DateTime.Parse("2021-01-01T04:00:00")
           }
         }); //NOTE: WillRespondWith call must come last as it will register the interaction
 
@@ -65,39 +66,42 @@ namespace consumer.tests
 
 
     }
-
-    [Fact]
-    public void GetById_IfNotExists_MustReturnNot()
-    {
-      //Arrange
-      _mockProviderService
-        .Given("There is nothing with id 0")
-        .UponReceiving("A GET request to retrieve the something")
-        .With(new ProviderServiceRequest
+    /*
+        [Fact]
+        public void GetById_IfNotExists_MustReturnNot()
         {
-          Method = HttpVerb.Get,
-          Path = "/somethings/0",
-          Headers = new Dictionary<string, object>
-          {
-          { "Accept", "application/json" }
-          }
-        })
-        .WillRespondWith(new ProviderServiceResponse
-        {
-          Status = 404
-        }); //NOTE: WillRespondWith call must come last as it will register the interaction
+          //Arrange
+          const string givenCode = "404";
+          _mockProviderService
+            .Given("There is nothing with id 0")
+            .UponReceiving("A GET request to retrieve the something")
+            .With(new ProviderServiceRequest
+            {
+              Method = HttpVerb.Get,
+              Path = "/somethings/0",
+              Query = Match.Regex($"code={givenCode}", "code=(404)$"),
+              Headers = new Dictionary<string, object>
+              {
+              { "Accept", "application/json" }
+              }
+            })
+            .WillRespondWith(new ProviderServiceResponse
+            {
+              Status = 404
+            }); //NOTE: WillRespondWith call must come last as it will register the interaction
 
-      var consumer = new ApiClient(_mockProviderServiceBaseUri);
+          var consumer = new ApiClient(_mockProviderServiceBaseUri);
 
-      //Act
-      var result = consumer.GetSomething(0);
+          //Act
+          var result = consumer.GetSomething(0);
 
-      //Assert
-      Assert.Equal(HttpStatusCode.NotFound, result.Result.StatusCode);
+          //Assert
+          Assert.Equal(HttpStatusCode.NotFound, result.Result.StatusCode);
 
-      _mockProviderService.VerifyInteractions(); //NOTE: Verifies that interactions registered on the mock provider are called at least once
+          _mockProviderService.VerifyInteractions(); //NOTE: Verifies that interactions registered on the mock provider are called at least once
 
 
-    }
+        }
+    */
   }
 }

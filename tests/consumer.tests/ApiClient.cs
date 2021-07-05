@@ -23,7 +23,7 @@ namespace consumer.tests
 
       string reasonPhrase;
 
-      var request = new HttpRequestMessage(HttpMethod.Get, "/somethings/" + id.ToString());
+      var request = new HttpRequestMessage(HttpMethod.Get, "/Something/" + id.ToString());
       request.Headers.Add("Accept", "application/json");
 
       var response = await _client.SendAsync(request);
