@@ -1,0 +1,1 @@
+docker run --init --rm -v $pwd/OpenApi:/tmp --name Prism4 -p 4010:4010 stoplight/prism:4 mock -h 0.0.0.0 "/tmp/Something.yml"
