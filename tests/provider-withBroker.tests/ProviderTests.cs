@@ -9,24 +9,25 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace provider.tests
+namespace provider_withBroker.tests
 {
 	public class ProviderTests : IDisposable
 	{
 		private readonly string _apiUri;
 		private ITestOutputHelper _output;
 		private readonly string _pactDirectory;
-		private IPactVerifier _pactVerifier;
-
+		private readonly IPactVerifier _pactVerifier;
 
 		public ProviderTests( ITestOutputHelper output)
 		{
 			_output = output;
 			_apiUri = "http://localhost:4010";
-			_pactDirectory = @"..\..\..\..\..\pacts\consumer1-testapi1.json";
+			_pactDirectory = "http://localhost:9292/pacts/provider/TestApi1/consumer/Consumer1/latest";
 
 			var pactConfig = new PactVerifierConfig
 			{
+				PublishVerificationResults = true,
+				ProviderVersion = "1.0.0",
 				Outputters = new List<IOutput>
 				{
 					new XUnitOutputter(_output)
@@ -39,12 +40,11 @@ namespace provider.tests
 		[Fact]
 		public void Pact_Should_Be_Verified()
 		{
-		_pactVerifier
+			_pactVerifier
 			.ServiceProvider("TestApi1", _apiUri)
 			.HonoursPactWith("Consumer1")
 			.PactUri(_pactDirectory)
 			.Verify();
-
 		}
 
 		private bool _disposed = false;
