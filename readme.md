@@ -162,7 +162,7 @@ A generated yaml file is included in this solution, under ``./OpenApi``.
 
 Mock servers short-circuit the development process by allowing consumers to start writing their applications and connecting to a "fake" endpoint. However, before consumer app developers start working on their apps, the contract must first be verified to match the consumer expectations. This allows the mock server to perform double duty -- first, as an endpoint for the expectations to be verified against, and when successful, as the endpoint for consumer app developers.
 
-In the solution we will use a mock server called [Prism](https://github.com/stoplightio/prism). This is an open-source project provided by [Stoplight](https://stoplight.io).
+In the solution we will use a mock server called [Prism](https://github.com/stoplightio/prism). This is an open-source project provided by [Stoplight](https://stoplight.io). Note that at the time of writing, Prism does not support GraphQL.
 
 While this server can be started using NodeJs, this project will instead take the Docker route, to reduce the need for additional software.
 
