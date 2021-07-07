@@ -4,6 +4,20 @@ The purpose of this project is to provide a skeletal example of using Pact for .
 
 Note as well that the functionalities mentioned here were performed on a Windows 10 desktop, although equivalent functions exist for other platforms. 
 
+## Requirements
+
+This project assumes you have the following tools on your environment:
+
+1. Windows 10. Make sure you have applied relevant updates. As mentioned above, slight configuration changes may need to be applied if this were applied to another operating environment.
+2. Any Code editor that recognizes and works with C# code:
+	1. [VS Code](https://code.visualstudio.com/)
+	2. [VsCodium](https://vscodium.com/)
+	3. [Visual Studio](https://visualstudio.microsoft.com/)
+	4. [JetBrains Rider](https://www.jetbrains.com/rider/)
+3. [Dotnet 5](https://dotnet.microsoft.com/download/dotnet/5.0). Note that this may have been installed by your IDE. One quick way would be to launch a Powershell window where you can execute ``dotnet --info``. If this results in an invalid response then it's not yet installed.
+4. [Docker Desktop](https://www.docker.com/products/docker-desktop)
+5. [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.1). The version that was installed with Windows 10 would be sufficient.
+
 ## Introduction
 
 API Contract Testing is a process which ensures that the API Contract matches expectations and implementations. There are, generally, 2 sides to a contract test:
@@ -32,6 +46,8 @@ A provider side view of the contract refers to what the actual API endpoint retu
 
 ## Workflow 
 
+![image](./assets/img/api%20design%2001.png){height=200}
+
 Here we recommend a workflow which can be followed to generate functional and accurate APIs.
 1. Generate consumer expectations 
 2. Save expectations in an accessible location
@@ -56,21 +72,21 @@ This solution will be using an xUnit project to aid in the generation of the Pac
 	``cd ../../pacts``
 5. there will be a file called ``consumer1-testapi1.json`` which is the Pact file generated if the test was successful
 
-#### Steps to Create your own test
+#### Steps to write your own test
 1. create new xUnit test project 
 		``dotnet new xunit``
 2. add PactNet (replace .Windows with something else if this is being implemented on a different platform)
 		``dotnet add package pactnet.windows``
-3. add a mock fixture: see PactMock.cs
-4. add an API Client: see ApiClient.cs
-5. add your tests: see Consumer1Tests.cs
+3. add a mock fixture: see [PactMock.cs](./tests/consumer.tests/PactMock.cs)
+4. add an API Client: see [ApiClient.cs](./tests/consumer.tests/ApiClient.cs)
+5. add your tests: see [Consumer1Tests.cs]((./tests/consumer.tests/Consumer1Tests.cs))
 6. run your tests 
 		``dotnet test``
 7. locate your pacts folder and view the generated pact file in JSON format
 
 ### Save expectations in an accessible location
 
-Once the tests are successfully executed, a Pact file will be generated. For the purpose of this solution, it is stored inside the ``.\pact`` folder. This can serve as the location for the providers to view this as well. 
+Once the tests are successfully executed, a Pact file will be generated. For the purpose of this solution, it is stored inside the [``./pacts``](./pacts/) folder. This can serve as the location for the providers to view this as well. 
 
 CI/CD pipelines can also automate the transfer of the Pact file to a location not related to this project, which ensures its visibility and accessibility for automation tasks.
 
@@ -139,7 +155,7 @@ A generated yaml file is included in this solution, under ``./OpenApi``.
 
 Mock servers short-circuit the development process by allowing consumers to start writing their applications and connecting to a "fake" endpoint. However, before consumer app developers start working on their apps, the contract must first be verified to match the consumer expectations. This allows the mock server to perform double duty -- first, as an endpoint for the expectations to be verified against, and when successful, as the endpoint for consumer app developers.
 
-In the solution we will use a mock server called [Prism](https://github.com/stoplightio/prism). 
+In the solution we will use a mock server called [Prism](https://github.com/stoplightio/prism). This is an open-source project provided by [Stoplight](https://stoplight.io).
 
 While this server can be started using NodeJs, this project will instead take the Docker route, to reduce the need for additional software.
 
