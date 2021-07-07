@@ -35,7 +35,7 @@ Pact is an open source testing framework, generally agnostic of current contract
 
 ### Consumer Side
 
-A Consumer side view of the contract refers to what a consumer expects of the contract. the term Consumer also refers to the applications that consume the API.
+A Consumer side view of the contract refers to what a consumer expects of the contract. The term Consumer also refers to the applications that consume the API.
 
 For example, a front-end application may, upon sending a ``GET`` request for the ``User`` object, expect the following fields: ``["userId", "fullName"]``. Another front-end application, upon sending the request, may expect other fields such as ``["userId", "firstName", "lastName", ["contactPreferences"]]``. So, each consumer can then describe what they expect. 
 
@@ -64,15 +64,17 @@ Here we recommend a workflow which can be followed to generate functional and ac
 This solution will be using an xUnit project to aid in the generation of the Pact File. follow the section ["Steps to execute current test"](#steps-to-execute-current-test) to generate this file. Note that you can create as many tests as needed, and furthermore, many client expectations can be generated separately. 
 
 #### Steps to execute current test
-1. go into the tests/consumer.tests folder
+1. Go into the tests/consumer.tests folder
 	``cd ./tests/consumer.tests``
-2. rebuild the project
+2. Rebuild the project
 	``dotnet build``
-3. run the tests
+3. Run the tests
 	``dotnet test``
-4. go into the pacts folder to view the generated JSON file
+
+	![image](./assets/img/powershell--consumer--dotnet-test.PNG)
+4. If the tests are successful, the pact file will be generated. Go into the pacts folder to view the generated JSON file
 	``cd ../../pacts``
-5. there will be a file called ``consumer1-testapi1.json`` which is the Pact file generated if the test was successful
+5. There will be a file called ``consumer1-testapi1.json`` which is the Pact file generated if the test was successful
 
 #### Steps to write your own test
 1. create new xUnit test project 
@@ -110,7 +112,10 @@ A PowerShell script is included to start Pact Broker. To start this, from the ro
 An output similar to the one below will be displayed:
 ![image](assets/img/powershell--start-pact-broker.png)
 
-This will start the Pact Broker. Head on to ``http://localhost:9292`` to access the application.
+This will start the Pact Broker. Head on to ``http://localhost:9292`` to access the application. The UI will look like this:
+![image](assets/img/pact-broker--first-time-start.PNG)
+
+
 
 To stop the broker, start another PowerShell window, and type in the following command at the root of this project:
 		``.\scripts\StopPactBroker.ps1``
@@ -185,6 +190,7 @@ This solution will be using an xUnit project to verify the expectations in the g
 	``dotnet build``
 3. run the tests
 	``dotnet test``
+	![image](assets/img/powershell--provider-dotnet-test.PNG)
 4. if the tests are successful, then the Pact files are verified.
 
 #### Steps to execute current test against the pact broker
@@ -195,9 +201,9 @@ This solution will be using an xUnit project to verify the expectations in the g
 3. run the tests
 	``dotnet test``
 4. if the tests are successful, then the Pact files are verified.
+	![image](assets/img/powershell--provider-withBroker-dotnet-test.PNG)
 5. launch the browser, and go to the default pact broker URL. Note that the ``Last Verified`` column is now filled.
-
-![image](assets/img/pact-broker--after-verify.PNG)
+	![image](assets/img/pact-broker--after-verify.PNG)
 
 
 ### Upon completion of the actual API, validate the expectations against it

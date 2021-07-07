@@ -21,8 +21,6 @@ namespace consumer.tests
     public async Task<HttpResponseMessage> GetSomething(int id)
     {
 
-      string reasonPhrase;
-
       var request = new HttpRequestMessage(HttpMethod.Get, "/Something/" + id.ToString());
       request.Headers.Add("Accept", "application/json");
 
