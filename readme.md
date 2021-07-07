@@ -20,6 +20,8 @@ This project assumes you have the following tools on your environment:
 
 ## Introduction
 
+![image](./assets/img/presentation--contract-consumer-provider.png)
+
 API Contract Testing is a process which ensures that the API Contract matches expectations and implementations. There are, generally, 2 sides to a contract test:
 
 1. Consumer Side 
